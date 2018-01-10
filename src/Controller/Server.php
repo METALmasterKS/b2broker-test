@@ -28,14 +28,16 @@ class Server {
             $diff = array_udiff_assoc($this->data, get_object_vars($machine), function ($a, $b){
                 return $a !== $b;
             });
+            if (isset($diff['sets']))
+                unset($diff['sets']);
             
             try {
                 $this->machinesRepository->saveMachineOptions($diff, $machine->id);
                 
-                $this->response = array_merge($this->response, array_combine(
-                    array_map(function ($key) {
-                        return "set_$key";
-                    }, array_keys($diff)), $diff));
+                $this->response = array_merge(
+                    $this->response, 
+                    \App\Utils\Functions::array_map_keys([self, 'addSetPrefix'], $diff)
+                );
             } catch (\App\Exceptions\NothingToUpdateException $e) {
                 
             }
@@ -43,10 +45,10 @@ class Server {
             try {
                 $this->machinesRepository->saveMachineOptionsSet($this->data['sets'], $machine->id);
                 
-                $this->response = array_merge($this->response, array_combine(
-                    array_map(function ($key) {
-                        return "set_$key";
-                    }, array_keys($this->data['sets'])), $this->data['sets']));
+                $this->response = array_merge(
+                    $this->response, 
+                    \App\Utils\Functions::array_map_keys([self, 'addSetPrefix'], $this->data['sets'])
+                );
             } catch (\App\Exceptions\NothingToUpdateException $e) {
                 
             }
@@ -93,5 +95,9 @@ class Server {
         $this->data['sets'] = $params['sets'] ?: [];
         
         return true;
+    }
+    
+    public static function addSetPrefix(string $str) {
+        return "set_$str";
     }
 }
