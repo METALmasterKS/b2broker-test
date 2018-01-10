@@ -1,10 +1,16 @@
-[Задание](./Тестовое задание на вакансию PHP-программист.pdf) не до конца ясно, необходимо обсуждение.
+[Задание](Тестовое задание на вакансию PHP-программист.pdf) не до конца ясно, необходимо обсуждение.
 
 Для запуска необходимо 
-PHP >= 5.3
-PostgreSQL server
+ - PHP >= 5.3
+ - PostgreSQL server
 
 ### installing
+
+`git clone https://github.com/METALmasterKS/b2broker-test.git api.b2broker.local`
+
+`cd api.b2broker.local`
+
+`wget https://getcomposer.org/installer && php installer && rm installer`
 
 `php composer.phar install`
 
