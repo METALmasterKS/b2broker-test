@@ -1,0 +1,15 @@
+{
+    "name": "metalmaster/api.b2broker",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Administrator",
+            "email": "009@3259404.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
