@@ -16,9 +16,9 @@ try {
 } catch (\App\Exceptions\ValidationException $validationException) {
     header('HTTP/1.1 400');
     //throw $validationException;
-    echo "==========\n", sprintf('Validation Failed - %s', $validationException->getMessage()), "==========\n";
+    echo "==========\n", sprintf("Validation Failed - %s\n", $validationException->getMessage()), "==========\n";
 } catch (\Exception $e) {
     header('HTTP/1.1 500 Internal Server Error');
-    echo "==========\n", 'Ooops! Internal Server Error', "==========\n";
+    echo "==========\n", "Ooops! Internal Server Error\n", "==========\n";
 }
 ?>

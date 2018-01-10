@@ -36,7 +36,7 @@ class Server {
                 
                 $this->response = array_merge(
                     $this->response, 
-                    \App\Utils\Functions::array_map_keys([self, 'addSetPrefix'], $diff)
+                    \App\Utils\Functions::array_map_keys('\App\Controller\Server::addSetPrefix', $diff)
                 );
             } catch (\App\Exceptions\NothingToUpdateException $e) {
                 
@@ -47,7 +47,7 @@ class Server {
                 
                 $this->response = array_merge(
                     $this->response, 
-                    \App\Utils\Functions::array_map_keys([self, 'addSetPrefix'], $this->data['sets'])
+                    \App\Utils\Functions::array_map_keys('\App\Controller\Server::addSetPrefix', $this->data['sets'])
                 );
             } catch (\App\Exceptions\NothingToUpdateException $e) {
                 
@@ -92,7 +92,7 @@ class Server {
         
         //тут я не очень понял ТЗ, делаю как понял, далее нужно обсуждать
         
-        $this->data['sets'] = $params['sets'] ?: [];
+        $this->data['sets'] = isset($params['sets']) ? $params['sets'] : [];
         
         return true;
     }
